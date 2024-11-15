@@ -4,10 +4,11 @@
 //const hola3='hola3' //Constantes que no cambian
 console.log('Si funciona')
 const API_KEY = "BaaxskAMPr393cP535tFTOcJR6hLDisM"
-const searchQuery = 'goku'
+//const searchQuery = 'goku'
 
 // Funcion para hacer fetch de los datos
-async function fetchGifs() {
+async function fetchGifs(searchQuery) {
+  //endpoint de search
   const searchEndpoint = `http://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${searchQuery}`
   //intenta obtener la respuesta
   try {
@@ -45,4 +46,16 @@ gifs.forEach(gif => {
 });
 
 }
-fetchGifs()
+//fetchGifs()
+
+document.getElementById('search-form').addEventListener('submit',(event) => {
+  //Evita que la pagina se recargue al enviar el formulario
+  event.preventDefault();
+  //se captura el valor del input y elimina los espacios en blanco
+  const searchQuery = document.getElementById('search-input').value.trim();
+
+if(searchQuery){
+fetchGifs(searchQuery)
+}
+
+})
